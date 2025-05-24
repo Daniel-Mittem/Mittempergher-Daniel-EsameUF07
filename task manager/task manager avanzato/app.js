@@ -100,20 +100,26 @@ function renderTasks() {
             if (isEditing) {
                 return `
                     <div class="task ${task.status}">
-                        <input type="text" id="editInput${task.id}" value="${task.text}">
-                        <button onclick="saveEdit(${task.id}, document.getElementById('editInput${task.id}').value)">Salva</button>
-                        <button onclick="cancelEdit()">Annulla</button>
+                        <input type="text" class="edit-input" value="${task.text}" id="editInput${task.id}">
+                        <div class="task-actions">
+                            <button class="task-btn save-btn" onclick="saveEdit(${task.id}, document.getElementById('editInput${task.id}').value)">Salva</button>
+                            <button class="task-btn cancel-btn" onclick="cancelEdit()">Annulla</button>
+                        </div>
                     </div>
                 `;
             }
 
             return `
                 <div class="task ${task.status}">
-                    <div class="task-text">${task.text}</div>
-                    <div class="task-status">${statusNames[task.status]}</div>
-                    <button onclick="editTask(${task.id})">Modifica</button>
-                    <button onclick="changeStatus(${task.id})">Cambia Stato</button>
-                    <button onclick="deleteTask(${task.id})">Elimina</button>
+                    <div class="task-content">
+                        <div class="task-text">${task.text}</div>
+                        <span class="task-status status-${task.status}">${statusNames[task.status]}</span>
+                    </div>
+                    <div class="task-actions">
+                        <button class="task-btn edit-btn" onclick="editTask(${task.id})">Modifica</button>
+                        <button class="task-btn status-btn" onclick="changeStatus(${task.id})">Cambia Stato</button>
+                        <button class="task-btn delete-btn" onclick="deleteTask(${task.id})">Elimina</button>
+                    </div>
                 </div>
             `;
         }).join('');
