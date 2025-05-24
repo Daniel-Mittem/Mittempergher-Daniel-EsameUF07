@@ -15,6 +15,16 @@
             <input type="text" id="taskInput" placeholder="Scrivi una nuova attività...">
             <button id="addBtn">Aggiungi</button>
         </div>
+
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="🔍 Cerca attività...">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Tutte</button>
+                <button class="filter-btn" data-filter="todo">Da fare</button>
+                <button class="filter-btn" data-filter="in-progress">In corso</button>
+                <button class="filter-btn" data-filter="completed">Completate</button>
+            </div>
+        </div>
         
         <div id="taskList">
             <div class="empty-message">Nessuna attività. Aggiungi la prima!</div>
