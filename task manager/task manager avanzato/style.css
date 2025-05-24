@@ -67,16 +67,58 @@ h1 {
     background-color: rgba(0, 86, 179, 0.8);
 }
 
+.controls {
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+#searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background-color: rgba(0, 123, 255, 0.7);
+    border-color: rgba(0, 123, 255, 0.5);
+}
+
+.filter-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 .task {
     padding: 15px;
     margin-bottom: 10px;
     background-color: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-left: 4px solid #45b7d1; 
     border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: white;
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
@@ -87,37 +129,89 @@ h1 {
     background-color: rgba(255, 255, 255, 0.25);
 }
 
+.task.todo {
+    border-left: 4px solid #45b7d1;
+}
+
+.task.in-progress {
+    border-left: 4px solid #ffc107;
+}
+
 .task.completed {
+    border-left: 4px solid #28a745;
     background-color: rgba(212, 237, 218, 0.2);
+}
+
+.task-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-text {
+    font-size: 16px;
+    flex: 1;
+}
+
+.task.completed .task-text {
     text-decoration: line-through;
     color: rgba(255, 255, 255, 0.6);
 }
 
-.task-text {
-    flex: 1;
-    margin-right: 10px;
+.task-status {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-left: 10px;
+    backdrop-filter: blur(10px);
 }
 
-.task-buttons {
+.status-todo {
+    background: rgba(69, 183, 209, 0.3);
+    color: white;
+}
+
+.status-in-progress {
+    background: rgba(255, 193, 7, 0.3);
+    color: white;
+}
+
+.status-completed {
+    background: rgba(40, 167, 69, 0.3);
+    color: white;
+}
+
+.task-actions {
     display: flex;
     gap: 5px;
+    flex-wrap: wrap;
 }
 
-.complete-btn, .delete-btn {
+.task-btn {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 12px;
     color: white;
+    transition: all 0.3s ease;
 }
 
-.complete-btn {
-    background-color: rgba(40, 167, 69, 0.7);
+.edit-btn {
+    background: rgba(23, 162, 184, 0.7);
 }
 
-.complete-btn:hover {
-    background-color: rgba(33, 136, 56, 0.8);
+.edit-btn:hover {
+    background: rgba(23, 162, 184, 0.9);
+}
+
+.status-btn {
+    background: rgba(108, 117, 125, 0.7);
+}
+
+.status-btn:hover {
+    background: rgba(108, 117, 125, 0.9);
 }
 
 .delete-btn {
@@ -125,7 +219,40 @@ h1 {
 }
 
 .delete-btn:hover {
-    background-color: rgba(200, 35, 51, 0.8);
+    background: rgba(200, 35, 51, 0.8);
+}
+
+
+.edit-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.edit-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.save-btn {
+    background: rgba(40, 167, 69, 0.7);
+}
+
+.save-btn:hover {
+    background: rgba(33, 136, 56, 0.8);
+}
+
+.cancel-btn {
+    background: rgba(108, 117, 125, 0.7);
+}
+
+.cancel-btn:hover {
+    background: rgba(108, 117, 125, 0.9);
 }
 
 .empty-message {
