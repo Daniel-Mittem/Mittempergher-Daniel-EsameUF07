@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cronometro Digitale</title>
 </head>
 <body>
-    
+    <div>
+        <h1>Cronometro Digitale</h1>
+        
+        <div id="timeDisplay">00:00</div>
+        
+        <div>
+            <button class="btn btn-start" id="startBtn" onclick="startStopwatch()">Start</button>
+            <button class="btn btn-stop" id="stopBtn" onclick="stopStopwatch()" disabled>Stop</button>
+            <button class="btn btn-reset" id="resetBtn" onclick="resetStopwatch()">Reset</button>
+        </div>
+    </div>
 </body>
 </html>
