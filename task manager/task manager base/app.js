@@ -31,3 +31,29 @@ function deleteTask(id) {
         tasks = tasks.filter(t => t.id !== id);
         renderTasks();
 }
+
+function renderTasks() {
+        if (tasks.length === 0) {
+            taskList.innerHTML = '<div class="empty-message">Nessuna attività. Aggiungi la prima!</div>';
+            return;
+        }
+
+        taskList.innerHTML = tasks.map(task => `
+            <div class="task ${task.completed ? 'completed' : ''}">
+                <div class="task-text">${task.text}</div>
+                <div class="task-buttons">
+                    <button class="complete-btn" onclick="completeTask(${task.id})">
+                        ${task.completed ? 'Annulla' : 'Fatto'}
+                    </button>
+                    <button class="delete-btn" onclick="deleteTask(${task.id})">
+                        Elimina
+                    </button>
+                </div>
+            </div>
+        `).join('');
+}
+
+addBtn.onclick = addTask;
+taskInput.onkeypress = function(e) {
+    if (e.key === 'Enter') addTask();
+};
