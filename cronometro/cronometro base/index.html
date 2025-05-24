@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronometro Digitale</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <h1>Cronometro Digitale</h1>
+    <div class="stopwatch-container">
+        <h1 class="title">Cronometro Digitale</h1>
         
-        <div id="timeDisplay">00:00</div>
+        <div class="time-display" id="timeDisplay">00:00</div>
         
-        <div>
+        <div class="controls">
             <button class="btn btn-start" id="startBtn" onclick="startStopwatch()">Start</button>
             <button class="btn btn-stop" id="stopBtn" onclick="stopStopwatch()" disabled>Stop</button>
             <button class="btn btn-reset" id="resetBtn" onclick="resetStopwatch()">Reset</button>
