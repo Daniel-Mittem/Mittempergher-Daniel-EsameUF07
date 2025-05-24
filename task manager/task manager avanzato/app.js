@@ -2,11 +2,13 @@ let tasks = [];
 let taskId = 1;
 let editingTaskId = null;
 let searchTerm = '';
+let currentFilter = 'all';
 
 const taskInput = document.getElementById('taskInput');
 const addBtn = document.getElementById('addBtn');
 const taskList = document.getElementById('taskList');
 const searchInput = document.getElementById('searchInput');
+const filterBtns = document.querySelectorAll('.filter-btn');
        
 function addTask() {
     const text = taskInput.value.trim();
@@ -44,9 +46,19 @@ function deleteTask(id) {
 }
 
 function filterTasks() {
-    return tasks.filter(task =>
-        task.text.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let filtered = tasks;
+
+    if (currentFilter !== 'all') {
+        filtered = filtered.filter(task => task.status === currentFilter);
+    }
+
+    if (searchTerm) {
+        filtered = filtered.filter(task =>
+            task.text.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
+
+    return filtered;
 }
 
 function editTask(id) {
@@ -116,3 +128,12 @@ searchInput.oninput = function(e) {
     searchTerm = e.target.value;
     renderTasks();
 };
+
+filterBtns.forEach(btn => {
+    btn.onclick = function () {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        renderTasks();
+    };
+});
