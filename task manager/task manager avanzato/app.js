@@ -12,19 +12,27 @@ function addTask() {
         tasks.push({
             id: taskId++,
             text: text,
-            completed: false
+            completed: "todo"
         });
 
         taskInput.value = '';
         renderTasks();
 }
 
-function completeTask(id) {
-        const task = tasks.find(t => t.id === id);
-            if (task) {
-                task.completed = !task.completed;
-                renderTasks();
-            }
+
+function changeStatus(id) {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
+
+    if (task.status === 'todo') {
+        task.status = 'in-progress';
+    } else if (task.status === 'in-progress') {
+        task.status = 'completed';
+    } else {
+        task.status = 'todo';
+    }
+
+    renderTasks();
 }
 
 function deleteTask(id) {
@@ -38,17 +46,18 @@ function renderTasks() {
             return;
         }
 
+        const statusNames = {
+            'todo': 'Da fare',
+            'in-progress': 'In corso',
+            'completed': 'Completata'
+        };
+
         taskList.innerHTML = tasks.map(task => `
-            <div class="task ${task.completed ? 'completed' : ''}">
+            <div class="task ${task.status}">
                 <div class="task-text">${task.text}</div>
-                <div class="task-buttons">
-                    <button class="complete-btn" onclick="completeTask(${task.id})">
-                        ${task.completed ? 'Annulla' : 'Fatto'}
-                    </button>
-                    <button class="delete-btn" onclick="deleteTask(${task.id})">
-                        Elimina
-                    </button>
-                </div>
+                <div class="task-status">${statusNames[task.status]}</div>
+                <button onclick="changeStatus(${task.id})">Cambia Stato</button>
+             <button onclick="deleteTask(${task.id})">Elimina</button>
             </div>
         `).join('');
 }
