@@ -1,5 +1,6 @@
 let tasks = [];
 let taskId = 1;
+let editingTaskId = null;
 
 const taskInput = document.getElementById('taskInput');
 const addBtn = document.getElementById('addBtn');
@@ -40,6 +41,25 @@ function deleteTask(id) {
         renderTasks();
 }
 
+function editTask(id) {
+    editingTaskId = id;
+    renderTasks();
+}
+
+function saveEdit(id, newText) {
+    const task = tasks.find(t => t.id === id);
+    if (task && newText.trim() !== '') {
+        task.text = newText.trim();
+    }
+    editingTaskId = null;
+    renderTasks();
+}
+
+function cancelEdit() {
+    editingTaskId = null;
+    renderTasks();
+}
+
 function renderTasks() {
         if (tasks.length === 0) {
             taskList.innerHTML = '<div class="empty-message">Nessuna attività. Aggiungi la prima!</div>';
@@ -52,14 +72,29 @@ function renderTasks() {
             'completed': 'Completata'
         };
 
-        taskList.innerHTML = tasks.map(task => `
-            <div class="task ${task.status}">
-                <div class="task-text">${task.text}</div>
-                <div class="task-status">${statusNames[task.status]}</div>
-                <button onclick="changeStatus(${task.id})">Cambia Stato</button>
-             <button onclick="deleteTask(${task.id})">Elimina</button>
-            </div>
-        `).join('');
+        taskList.innerHTML = tasks.map(task => {
+            const isEditing = editingTaskId === task.id;
+
+            if (isEditing) {
+                return `
+                    <div class="task ${task.status}">
+                        <input type="text" id="editInput${task.id}" value="${task.text}">
+                        <button onclick="saveEdit(${task.id}, document.getElementById('editInput${task.id}').value)">Salva</button>
+                        <button onclick="cancelEdit()">Annulla</button>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="task ${task.status}">
+                    <div class="task-text">${task.text}</div>
+                    <div class="task-status">${statusNames[task.status]}</div>
+                    <button onclick="editTask(${task.id})">Modifica</button>
+                    <button onclick="changeStatus(${task.id})">Cambia Stato</button>
+                    <button onclick="deleteTask(${task.id})">Elimina</button>
+                </div>
+            `;
+        }).join('');
 }
 
 addBtn.onclick = addTask;
