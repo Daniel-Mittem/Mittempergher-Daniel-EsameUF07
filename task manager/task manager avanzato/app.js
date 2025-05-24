@@ -1,10 +1,12 @@
 let tasks = [];
 let taskId = 1;
 let editingTaskId = null;
+let searchTerm = '';
 
 const taskInput = document.getElementById('taskInput');
 const addBtn = document.getElementById('addBtn');
 const taskList = document.getElementById('taskList');
+const searchInput = document.getElementById('searchInput');
        
 function addTask() {
     const text = taskInput.value.trim();
@@ -41,6 +43,12 @@ function deleteTask(id) {
         renderTasks();
 }
 
+function filterTasks() {
+    return tasks.filter(task =>
+        task.text.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+}
+
 function editTask(id) {
     editingTaskId = id;
     renderTasks();
@@ -61,7 +69,9 @@ function cancelEdit() {
 }
 
 function renderTasks() {
-        if (tasks.length === 0) {
+        const filtered = filterTasks();
+
+        if (filtered.length === 0) {
             taskList.innerHTML = '<div class="empty-message">Nessuna attività. Aggiungi la prima!</div>';
             return;
         }
@@ -72,7 +82,7 @@ function renderTasks() {
             'completed': 'Completata'
         };
 
-        taskList.innerHTML = tasks.map(task => {
+        taskList.innerHTML = filtered.map(task => {
             const isEditing = editingTaskId === task.id;
 
             if (isEditing) {
@@ -100,4 +110,9 @@ function renderTasks() {
 addBtn.onclick = addTask;
 taskInput.onkeypress = function(e) {
     if (e.key === 'Enter') addTask();
+};
+
+searchInput.oninput = function(e) {
+    searchTerm = e.target.value;
+    renderTasks();
 };
