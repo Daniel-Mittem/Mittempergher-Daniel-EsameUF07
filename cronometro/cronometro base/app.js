@@ -15,3 +15,21 @@ function formatTime(milliseconds) {
     
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
+
+function updateDisplay() {
+    const currentTime = Date.now();
+    elapsedTime = (currentTime - startTime);
+    timeDisplay.textContent = formatTime(elapsedTime);
+}
+
+function startStopwatch() {
+    if (!isRunning) {
+        startTime = Date.now() - elapsedTime;
+        timerInterval = setInterval(updateDisplay, 10);
+        isRunning = true;
+        
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        startBtn.textContent = 'Running...';
+    }
+}
