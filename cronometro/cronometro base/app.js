@@ -33,3 +33,25 @@ function startStopwatch() {
         startBtn.textContent = 'Running...';
     }
 }
+function stopStopwatch() {
+    if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        startBtn.textContent = 'Start';
+    }
+}
+
+function resetStopwatch() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    elapsedTime = 0;
+    startTime = 0;
+    
+    timeDisplay.textContent = '00:00';
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+    startBtn.textContent = 'Start';
+}
