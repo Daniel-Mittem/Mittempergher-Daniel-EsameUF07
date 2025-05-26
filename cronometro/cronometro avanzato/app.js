@@ -81,3 +81,45 @@ function resetStopwatch() {
     
     console.log('Cronometro resettato');
 }
+
+function saveLap() {
+    if (isRunning) {
+        const currentTime = getCurrentTime();
+        const lapData = {
+            number: laps.length + 1,
+            time: currentTime,
+            formattedTime: formatTime(currentTime),
+            timestamp: new Date()
+        };
+        
+        laps.push(lapData);
+        updateLapDisplay();
+        
+        console.log(`Giro ${lapData.number} salvato:`, lapData.formattedTime);
+    }
+}
+
+function updateLapDisplay() {
+    lapList.innerHTML = '';
+    
+    if (laps.length === 0) {
+        const noLapsItem = document.createElement('li');
+        noLapsItem.className = 'no-laps';
+        noLapsItem.textContent = 'Nessun giro salvato';
+        lapList.appendChild(noLapsItem);
+        return;
+    }
+    
+    for (let i = laps.length - 1; i >= 0; i--) {
+        const lap = laps[i];
+        const lapItem = document.createElement('li');
+        lapItem.className = 'lap-item fade-in';
+        
+        lapItem.innerHTML = `
+            <span class="lap-number">Giro ${lap.number}</span>
+            <span class="lap-time">${lap.formattedTime}</span>
+        `;
+        
+        lapList.appendChild(lapItem);
+    }
+}
