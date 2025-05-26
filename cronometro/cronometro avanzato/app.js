@@ -13,12 +13,20 @@ const lapBtn = document.getElementById('lapBtn');
 const lapList = document.getElementById('lapList');
 const stopwatchContainer = document.getElementById('stopwatchContainer');
 
-function formatTime(milliseconds) {
-    const totalSeconds = Math.floor(milliseconds / 1000);
+function formatTime(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
+    const milliseconds = Math.floor((ms % 1000) / 10); 
     
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`;
+}
+
+function getCurrentTime() {
+    if (isRunning) {
+        return elapsedTime + (Date.now() - startTime);
+    }
+    return elapsedTime;
 }
 
 function updateDisplay() {
