@@ -123,3 +123,50 @@ function updateLapDisplay() {
         lapList.appendChild(lapItem);
     }
 }
+
+function setupEventListeners() {
+    startBtn.addEventListener('click', startStopwatch);
+    stopBtn.addEventListener('click', stopStopwatch);
+    resetBtn.addEventListener('click', resetStopwatch);
+    lapBtn.addEventListener('click', saveLap);
+    
+    document.addEventListener('keydown', function(event) {
+        switch(event.code) {
+            case 'Space':
+                event.preventDefault();
+                if (isRunning) {
+                    stopStopwatch();
+                } else {
+                    startStopwatch();
+                }
+                break;
+            case 'KeyR':
+                if (event.ctrlKey) {
+                    event.preventDefault();
+                    resetStopwatch();
+                }
+                break;
+            case 'KeyL':
+                if (event.ctrlKey && isRunning) {
+                    event.preventDefault();
+                    saveLap();
+                }
+                break;
+        }
+    });
+}
+
+
+function initializeApp() {
+    console.log('Inizializzazione cronometro avanzato...');
+    
+    updateDisplay();
+    updateLapDisplay();
+    setupEventListeners();
+    
+    console.log('Cronometro pronto!');
+    console.log('Comandi disponibili:');
+    console.log('- Spazio: Start/Stop');
+    console.log('- Ctrl+R: Reset');
+    console.log('- Ctrl+L: Salva Giro');
+}
