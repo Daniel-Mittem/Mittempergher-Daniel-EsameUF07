@@ -30,41 +30,54 @@ function getCurrentTime() {
 }
 
 function updateDisplay() {
-    const currentTime = Date.now();
-    elapsedTime = (currentTime - startTime);
-    timeDisplay.textContent = formatTime(elapsedTime);
+    const currentTime = getCurrentTime();
+    timeDisplay.textContent = formatTime(currentTime);
 }
 
 function startStopwatch() {
     if (!isRunning) {
-        startTime = Date.now() - elapsedTime;
-        timerInterval = setInterval(updateDisplay, 10);
+        startTime = Date.now();
+        timerInterval = setInterval(updateDisplay, 10); 
         isRunning = true;
         
         startBtn.disabled = true;
         stopBtn.disabled = false;
-        startBtn.textContent = 'Running...';
+        lapBtn.disabled = false;
+        stopwatchContainer.classList.add('running');
+        
+        console.log('Cronometro avviato');
     }
 }
+
 function stopStopwatch() {
     if (isRunning) {
+        elapsedTime = getCurrentTime();
         clearInterval(timerInterval);
         isRunning = false;
         
         startBtn.disabled = false;
         stopBtn.disabled = true;
-        startBtn.textContent = 'Start';
+        lapBtn.disabled = true;
+        stopwatchContainer.classList.remove('running');
+        
+        console.log('Cronometro fermato a:', formatTime(elapsedTime));
     }
 }
 
 function resetStopwatch() {
     clearInterval(timerInterval);
-    isRunning = false;
-    elapsedTime = 0;
     startTime = 0;
+    elapsedTime = 0;
+    isRunning = false;
     
-    timeDisplay.textContent = '00:00';
+    updateDisplay();
     startBtn.disabled = false;
     stopBtn.disabled = true;
-    startBtn.textContent = 'Start';
+    lapBtn.disabled = true;
+    stopwatchContainer.classList.remove('running');
+    
+    laps = [];
+    updateLapDisplay();
+    
+    console.log('Cronometro resettato');
 }
