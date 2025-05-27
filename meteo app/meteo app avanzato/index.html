@@ -22,7 +22,10 @@
             </div>
         </div>
 
-        <button class="search-btn" onclick="getWeatherData()">Ottieni Dati Meteo</button>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button class="search-btn" onclick="getWeatherData()" style="flex: 1; margin: 0;">Ottieni Dati Meteo</button>
+            <button class="search-btn" onclick="getCurrentLocation()" style="flex: 1; margin: 0; background: rgba(76, 175, 80, 0.3);">📍 Posizione Corrente</button>
+        </div>
 
         <div id="loading" class="loading">Caricamento...</div>
         <div id="error" class="error"></div>
