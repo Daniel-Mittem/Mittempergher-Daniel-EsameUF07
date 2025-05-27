@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meteo App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>🌤️ Meteo App</h1>
+        
+        <div class="input-group">
+            <div class="input-field">
+                <label for="latitude">Latitudine</label>
+                <input type="number" id="latitude" step="any">
+            </div>
+            <div class="input-field">
+                <label for="longitude">Longitudine</label>
+                <input type="number" id="longitude" step="any">
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button class="search-btn" onclick="getWeatherData()" style="flex: 1; margin: 0;">Ottieni Dati Meteo</button>
+            <button class="search-btn" onclick="getCurrentLocation()" style="flex: 1; margin: 0; background: rgba(76, 175, 80, 0.3);">📍 Posizione Corrente</button>
+        </div>
+
+        <div id="loading" class="loading">Caricamento...</div>
+        <div id="error" class="error"></div>
+
+        <div id="weatherData" class="weather-data">
+            <div class="weather-info" id="weatherInfo">
+            </div>
+
+            <div class="stored-data">
+                <h3>📁 Dati Salvati Localmente</h3>
+                <div class="data-content" id="storedData">Nessun dato</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
