@@ -247,6 +247,6 @@ Codici standard meteorologici:
 
 - **Sviluppatore**: Mittempergher Daniel
 - **Corso**: UF07:WEB
-- **Anno Accademico**: 2024/2025
+- **Anno Accademico**: 2025/2026
 
 ---
