@@ -78,3 +78,21 @@ function saveDataLocally(data, locationData) {
 
     document.getElementById('storedData').textContent = JSON.stringify(savedData, null, 2);
 }
+
+function showLoading() {
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('error').style.display = 'none';
+    document.getElementById('weatherData').classList.remove('show');
+}
+
+function showError(message) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('error').textContent = message;
+    document.getElementById('error').style.display = 'block';
+    document.getElementById('weatherData').classList.remove('show');
+}
+
+function hideStatusMessages() {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('error').style.display = 'none';
+}
