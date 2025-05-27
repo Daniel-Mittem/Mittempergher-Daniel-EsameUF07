@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.stopwatch-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    min-width: 400px;
+}
+
+.time-display {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-start {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.btn-stop {
+    background: linear-gradient(45deg, #f44336, #da190b);
+    color: white;
+}
+
+.btn-reset {
+    background: linear-gradient(45deg, #2196F3, #0b7dda);
+    color: white;
+}
+
+.btn-lap {
+    background: linear-gradient(45deg, #ff9800, #e68900);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.laps-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.laps-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.lap-list {
+    list-style: none;
+}
+
+.lap-item {
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 8px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #ff9800;
+    transition: all 0.3s ease;
+}
+
+.lap-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+.lap-number {
+    font-weight: bold;
+    color: #ff9800;
+}
+
+.lap-time {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.no-laps {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+.laps-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.laps-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.laps-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.laps-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.running .time-display {
+    animation: pulse 2s infinite;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
