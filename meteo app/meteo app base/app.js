@@ -64,3 +64,17 @@ function displayWeatherData(data, locationData) {
 
     document.getElementById('weatherData').classList.add('show');
 }
+
+function saveDataLocally(data, locationData) {
+    const placeName = locationData.city || locationData.locality || locationData.principalSubdivision || locationData.countryName || "Località sconosciuta";
+
+    savedData = {
+        timestamp: new Date().toISOString(),
+        location: placeName,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        current: data.current
+    };
+
+    document.getElementById('storedData').textContent = JSON.stringify(savedData, null, 2);
+}
