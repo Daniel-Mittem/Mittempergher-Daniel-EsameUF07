@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meteo App</title>
 </head>
 <body>
-    
+    <div>
+        <h1>🌤️ Meteo App</h1>
+        
+        <div>
+            <div >
+                <label for="latitude">Latitudine</label>
+                <input type="number" id="latitude" step="any">
+            </div>
+            <div>
+                <label for="longitude">Longitudine</label>
+                <input type="number" id="longitude" step="any">
+            </div>
+        </div>
+
+        <button onclick="getWeatherData()">Ottieni Dati Meteo</button>
+
+        <div id="loading">Caricamento...</div>
+        <div id="error"></div>
+
+        <div id="weatherData">
+            <div id="weatherInfo">
+            </div>
+
+            <div>
+                <h3>📁 Dati Salvati Localmente</h3>
+                <div id="storedData">Nessun dato</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
