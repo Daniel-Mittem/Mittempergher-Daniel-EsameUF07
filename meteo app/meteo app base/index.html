@@ -4,34 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meteo App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
+    <div class="container">
         <h1>🌤️ Meteo App</h1>
         
-        <div>
-            <div >
+        <div class="input-group">
+            <div class="input-field">
                 <label for="latitude">Latitudine</label>
                 <input type="number" id="latitude" step="any">
             </div>
-            <div>
+            <div class="input-field">
                 <label for="longitude">Longitudine</label>
                 <input type="number" id="longitude" step="any">
             </div>
         </div>
 
-        <button onclick="getWeatherData()">Ottieni Dati Meteo</button>
+        <button class="search-btn" onclick="getWeatherData()">Ottieni Dati Meteo</button>
 
-        <div id="loading">Caricamento...</div>
-        <div id="error"></div>
+        <div id="loading" class="loading">Caricamento...</div>
+        <div id="error" class="error"></div>
 
-        <div id="weatherData">
-            <div id="weatherInfo">
+        <div id="weatherData" class="weather-data">
+            <div class="weather-info" id="weatherInfo">
             </div>
 
-            <div>
+            <div class="stored-data">
                 <h3>📁 Dati Salvati Localmente</h3>
-                <div id="storedData">Nessun dato</div>
+                <div class="data-content" id="storedData">Nessun dato</div>
             </div>
         </div>
     </div>
