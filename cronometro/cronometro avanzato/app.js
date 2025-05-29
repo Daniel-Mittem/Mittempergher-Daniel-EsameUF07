@@ -1,10 +1,13 @@
+// Variabili per la gestione del tempo
 let startTime = 0;
 let elapsedTime = 0;
 let timerInterval = null;
 let isRunning = false;
 
+// Array per memorizzare i giri salvati
 let laps = [];
 
+// Riferimenti agli elementi del DOM
 const timeDisplay = document.getElementById('timeDisplay');
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
@@ -13,6 +16,7 @@ const lapBtn = document.getElementById('lapBtn');
 const lapList = document.getElementById('lapList');
 const stopwatchContainer = document.getElementById('stopwatchContainer');
 
+// Converte millisecondi in formato MM:SS:CS (centesimi di secondo)
 function formatTime(ms) {
     const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
@@ -22,6 +26,7 @@ function formatTime(ms) {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`;
 }
 
+// Calcola il tempo corrente totale, tenendo conto se il cronometro è in esecuzione
 function getCurrentTime() {
     if (isRunning) {
         return elapsedTime + (Date.now() - startTime);
@@ -29,11 +34,13 @@ function getCurrentTime() {
     return elapsedTime;
 }
 
+// Aggiorna il display del cronometro
 function updateDisplay() {
     const currentTime = getCurrentTime();
     timeDisplay.textContent = formatTime(currentTime);
 }
 
+// Avvia il cronometro
 function startStopwatch() {
     if (!isRunning) {
         startTime = Date.now();
@@ -49,6 +56,7 @@ function startStopwatch() {
     }
 }
 
+// Ferma il cronometro
 function stopStopwatch() {
     if (isRunning) {
         elapsedTime = getCurrentTime();
@@ -64,6 +72,7 @@ function stopStopwatch() {
     }
 }
 
+// Reimposta il cronometro e cancella tutti i giri salvati
 function resetStopwatch() {
     clearInterval(timerInterval);
     startTime = 0;
@@ -82,6 +91,7 @@ function resetStopwatch() {
     console.log('Cronometro resettato');
 }
 
+// Salva il tempo corrente come un nuovo giro (lap)
 function saveLap() {
     if (!isRunning) return;
 
@@ -104,6 +114,7 @@ function saveLap() {
     console.log(`Giro ${lapData.number} salvato:`, lapData.formattedLapTime, `(Totale: ${lapData.formattedTotalTime})`);
 }
 
+// Aggiorna la visualizzazione dei giri salvati
 function updateLapDisplay() {
     lapList.innerHTML = '';
 
@@ -130,12 +141,13 @@ function updateLapDisplay() {
     }
 }
 
+// Imposta i listener per pulsanti e scorciatoie da tastiera
 function setupEventListeners() {
     startBtn.addEventListener('click', startStopwatch);
     stopBtn.addEventListener('click', stopStopwatch);
     resetBtn.addEventListener('click', resetStopwatch);
     lapBtn.addEventListener('click', saveLap);
-    
+
     document.addEventListener('keydown', function(event) {
         switch(event.code) {
             case 'Space':
@@ -162,6 +174,7 @@ function setupEventListeners() {
     });
 }
 
+// Inizializza il cronometro alla partenza della pagina
 function initializeApp() {
     console.log('Inizializzazione cronometro avanzato...');
     
@@ -176,4 +189,5 @@ function initializeApp() {
     console.log('- Ctrl+L: Salva Giro');
 }
 
+// Avvia l'app una volta caricata la pagina
 document.addEventListener('DOMContentLoaded', initializeApp);
