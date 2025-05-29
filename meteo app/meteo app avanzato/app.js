@@ -1,3 +1,4 @@
+// 🌤️ Mappa dei codici meteo → Emoji + descrizione user-friendly
 const weatherIcons = {
     0: "☀️ Sole",
     1: "🌤️ Prevalentemente sereno", 
@@ -29,8 +30,10 @@ const weatherIcons = {
     99: "⛈️ Temporale con grandine forte"
 };
 
+// 💾 Variabile per salvare localmente i dati ottenuti
 let savedData = {};
 
+// 📍 Ottieni la posizione corrente dell’utente via Geolocalizzazione HTML5
 function getCurrentLocation() {
     if (!navigator.geolocation) {
         showError('⚠️ Geolocalizzazione non supportata');
@@ -38,8 +41,10 @@ function getCurrentLocation() {
     }
     
     showLoading();
+
     navigator.geolocation.getCurrentPosition(
         (position) => {
+            // Imposta nei campi input latitudine e longitudine
             document.getElementById('latitude').value = position.coords.latitude.toFixed(4);
             document.getElementById('longitude').value = position.coords.longitude.toFixed(4);
             getWeatherData();
@@ -48,6 +53,7 @@ function getCurrentLocation() {
     );
 }
 
+// 🌦️ Richiesta dati meteo e geolocalizzazione inversa (nome località)
 function getWeatherData() {
     const lat = document.getElementById('latitude').value;
     const lon = document.getElementById('longitude').value;
@@ -59,10 +65,13 @@ function getWeatherData() {
 
     showLoading();
 
+    // Open-Meteo API per meteo attuale
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,rain,cloud_cover,wind_speed_10m,weather_code`;
 
+    // BigDataCloud API per ottenere il nome della località
     const geocodeUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=it`;
 
+    // Richieste parallele: meteo + località
     Promise.all([
         fetch(url).then(res => res.json()),
         fetch(geocodeUrl).then(res => res.json())
@@ -77,11 +86,13 @@ function getWeatherData() {
         });
 }
 
+//Mostra i dati meteo nella pagina
 function displayWeatherData(data, locationData) {
     const meteo = data.current;
     const code = meteo.weather_code;
     const icona = weatherIcons[code] || "❓ Codice meteo: " + code;
-    
+
+    // Determina il nome della località con fallback
     const placeName = locationData.city || locationData.locality || locationData.principalSubdivision || locationData.countryName || "Località sconosciuta";
 
     const weatherInfo = document.getElementById("weatherInfo");
@@ -101,6 +112,7 @@ function displayWeatherData(data, locationData) {
     document.getElementById('weatherData').classList.add('show');
 }
 
+//Salva i dati meteo localmente per eventuale utilizzo successivo
 function saveDataLocally(data, locationData) {
     const placeName = locationData.city || locationData.locality || locationData.principalSubdivision || locationData.countryName || "Località sconosciuta";
     
@@ -112,15 +124,18 @@ function saveDataLocally(data, locationData) {
         current: data.current
     };
     
+    // Visualizza il JSON dei dati salvati
     document.getElementById('storedData').textContent = JSON.stringify(savedData, null, 2);
 }
 
+//Mostra stato di caricamento
 function showLoading() {
     document.getElementById('loading').style.display = 'block';
     document.getElementById('error').style.display = 'none';
     document.getElementById('weatherData').classList.remove('show');
 }
 
+//Mostra errore con messaggio specifico
 function showError(message) {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('error').textContent = message;
@@ -128,6 +143,7 @@ function showError(message) {
     document.getElementById('weatherData').classList.remove('show');
 }
 
+//Nasconde messaggi di stato (loading/error)
 function hideStatusMessages() {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('error').style.display = 'none';
