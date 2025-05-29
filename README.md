@@ -173,8 +173,7 @@ progetto-nome/
     ├── index.html             # Pagina principale
     ├── style.css              # Fogli di stile
     ├── script.js              # Logica JavaScript
-    ├── README.md              # Documentazione specifica
-    └── assets/                # Immagini, icone, etc.
+    └── README.md              # Documentazione specifica
 ```
 
 ---
